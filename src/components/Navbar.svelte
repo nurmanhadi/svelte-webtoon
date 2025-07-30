@@ -1,6 +1,19 @@
 <script>
     import logo from "../assets/logo.jpg";
     import defaultProfile from "../assets/user-icon.svg";
+    import { jwtDecode } from "jwt-decode";
+    import { role } from "$lib/role";
+    import { goto } from "$app/navigation";
+    let token = $state("");
+    let userRole = $state("");
+
+    $effect(() => {
+        const accessToken = localStorage.getItem("access_token");
+        if (accessToken != null && accessToken != "") {
+            token = accessToken;
+            userRole = jwtDecode(accessToken).role;
+        }
+    });
 </script>
 
 <div class="navbar bg-default shadow-sm">
@@ -49,12 +62,52 @@
                     />
                 </figure>
             </button>
-            <ul
-                class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
-            >
-                <li><a href="/#">Item 1</a></li>
-                <li><a href="/#">Item 2</a></li>
-            </ul>
+            {#if userRole === role.admin}
+                <ul
+                    class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
+                >
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/#">Dashboard</a>
+                    </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/admin/comic">Comic</a>
+                    </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/admin/genre">Genre</a>
+                    </li>
+                    <hr class="my-3 opacity-50 border-default" />
+                    <button
+                        onclick={() => goto("/auth/logout")}
+                        class="btn bg-red-500 shadow-none text-white"
+                        >Logout</button
+                    >
+                </ul>
+            {:else}
+                <ul
+                    class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
+                >
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/#">Profile</a>
+                    </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/#">Category</a>
+                    </li>
+                    <hr class="my-3 opacity-50 border-default" />
+                    {#if token === ""}
+                        <button
+                            onclick={() => goto("/auth/login")}
+                            class="btn bg-default shadow-none text-white"
+                            >Login</button
+                        >
+                    {:else}
+                        <button
+                            onclick={() => goto("/auth/login")}
+                            class="btn bg-red-500 shadow-none text-white"
+                            >Logout</button
+                        >
+                    {/if}
+                </ul>
+            {/if}
         </div>
     </div>
 </div>

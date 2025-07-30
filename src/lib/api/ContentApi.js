@@ -1,8 +1,8 @@
 class ContentApi {
     static async addContent(comicId, chapterId, formData) {
         const apiUrl = import.meta.env.VITE_API_URL
-        const token = localStorage.getItem("token")
-        return fetch(`${apiUrl}/api/admin/comics/${comicId}/chapters/${chapterId}/contents`, {
+        const token = localStorage.getItem("access_token")
+        return fetch(`${apiUrl}/api/comics/${comicId}/chapters/${chapterId}/contents`, {
             method: 'POST',
             headers: {
                 "Authorization": `Bearer ${token}`
