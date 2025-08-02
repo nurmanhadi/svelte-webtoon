@@ -1,5 +1,4 @@
 <script>
-    import logo from "../assets/logo.jpg";
     import defaultProfile from "../assets/user-icon.svg";
     import { jwtDecode } from "jwt-decode";
     import { role } from "$lib/role";
@@ -19,9 +18,6 @@
 <div class="navbar bg-default shadow-sm">
     <div class="flex-1">
         <a href="/" class="flex gap-1 items-center">
-            <figure>
-                <img src={logo} alt="logo" class="h-10 w-10 rounded-full" />
-            </figure>
             <h1 class="text-2xl font-bold text-white">Welltoon</h1>
         </a>
     </div>

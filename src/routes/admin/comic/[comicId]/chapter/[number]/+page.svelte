@@ -20,7 +20,6 @@
         const responseBody = await response.json();
         if (response.status === 200) {
             const data = responseBody.data;
-            console.log(data);
             chapter = data;
             comic = data.comic;
             chapters = data.comic.chapters;
@@ -35,14 +34,10 @@
 
         const files = Array.from(inputFile);
         let form = new FormData();
-        if (files.length > 10) {
-            loading = false;
-            await alertError("max file 10");
-            return;
-        }
         files.forEach((file) => {
             form.append("contents", file);
         });
+
         const response = await ContentApi.addContent(comicId, chapter.id, form);
         const responseBody = await response.json();
         if (response.status === 201) {
@@ -60,7 +55,7 @@
     });
 </script>
 
-{#if chapter == null && comic == null && chapters.length == 0 && contents.length == 0}
+{#if !chapter}
     <CenterLoading />
 {:else}
     <div>

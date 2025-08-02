@@ -1,4 +1,5 @@
 <script>
+    import CustomHeadMain from "../components/comic/CustomHeadMain.svelte";
     import ListComicUpdate from "../components/comic/ListComicUpdate.svelte";
     import Footer from "../components/Footer.svelte";
     import Navbar from "../components/Navbar.svelte";
@@ -9,6 +10,7 @@
         <Navbar />
     </div>
     <main class="min-h-screen">
+        <CustomHeadMain />
         <ListComicUpdate />
     </main>
     <div>

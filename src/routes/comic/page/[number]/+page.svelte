@@ -1,11 +1,15 @@
 <script>
-    import { alertError } from "$lib/Alert";
-    import ComicApi from "$lib/api/ComicApi";
-    import CenterLoading from "../CenterLoading.svelte";
+    import { goto } from "$app/navigation";
+    import { alertError } from "$lib/Alert.js";
+    import ComicApi from "$lib/api/ComicApi.js";
+    import CenterLoading from "../../../../components/CenterLoading.svelte";
 
+    const { params } = $props();
+    let page = $state(parseInt(params.number));
     let comics = $state([]);
-    let page = $state(1);
     let size = $state(20);
+    let totalPage = $state(0);
+    let totalElement = $state(0);
 
     async function getAllComicUpdate() {
         const response = await ComicApi.getAllComic(page, size);
@@ -13,6 +17,10 @@
         if (response.status === 200) {
             const data = responseBody.data;
             comics = data.contents;
+            page = data.page;
+            size = data.size;
+            totalElement = data.total_element;
+            totalPage = data.total_page;
         } else {
             await alertError(responseBody.error);
         }
@@ -29,18 +37,9 @@
     <div class="m-2 min-h-screen">
         <!-- comic update -->
         <div>
-            <div
-                class="flex justify-between items-center my-3 bg-default px-1 rounded"
-            >
-                <h1 class="font-bold text-lg text-white">Update</h1>
-                <a href="/comic/page/1" class="text-xs text-white rounded"
-                    >VIEW ALL</a
-                >
-            </div>
-
             <!-- list card comic -->
             <div
-                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center"
+                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3"
             >
                 {#each comics as comic (comic.id)}
                     <div class="md:max-w-48">
@@ -74,6 +73,42 @@
                         </ul>
                     </div>
                 {/each}
+            </div>
+
+            <!-- pagination -->
+            <div class="flex gap-2 my-5 justify-center">
+                {#if page == 1}
+                    <button
+                        disabled
+                        class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
+                        >{"<"} Prev</button
+                    >
+                {:else}
+                    <button
+                        onclick={() => {
+                            page -= 1;
+                            goto(`/comic/page/${page}`);
+                        }}
+                        class="bg-default text-white font-bold py-1 px-2 rounded"
+                        >{"<"} Prev</button
+                    >
+                {/if}
+                {#if page == totalPage}
+                    <button
+                        disabled
+                        class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
+                        >Next {">"}</button
+                    >
+                {:else}
+                    <button
+                        onclick={() => {
+                            page += 1;
+                            goto(`/comic/page/${page}`);
+                        }}
+                        class="bg-default text-white font-bold py-1 px-2 rounded"
+                        >Next {">"}</button
+                    >
+                {/if}
             </div>
         </div>
     </div>
