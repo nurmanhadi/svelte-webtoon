@@ -5,6 +5,7 @@
     import { goto } from "$app/navigation";
     let token = $state("");
     let userRole = $state("");
+    let searchKeyword = $state("");
 
     $effect(() => {
         const accessToken = localStorage.getItem("access_token");
@@ -23,8 +24,17 @@
     </div>
     <div class="flex gap-3 items-center">
         <!-- search 1 -->
-        <form class="bg-white rounded-sm p-1 hidden md:flex items-center gap-1">
-            <input type="text" placeholder="Search" class="outline-none" />
+        <form
+            action={`/search/${searchKeyword}`}
+            class="bg-white rounded-sm p-1 hidden md:flex items-center gap-1"
+        >
+            <input
+                bind:value={searchKeyword}
+                type="text"
+                placeholder="Search"
+                class="outline-none"
+                required
+            />
             <button type="submit">🔍</button>
         </form>
 
@@ -36,11 +46,16 @@
             <ul
                 class="dropdown-content menu bg-base-100 rounded-box z-1 p-2 shadow-sm top-12"
             >
-                <form class="bg-white rounded-sm p-1 flex items-center gap-1">
+                <form
+                    action={`/search/${searchKeyword}`}
+                    class="bg-white rounded-sm p-1 flex items-center gap-1"
+                >
                     <input
+                        bind:value={searchKeyword}
                         type="text"
                         placeholder="Search"
                         class="outline-none"
+                        required
                     />
                     <button type="submit">🔍</button>
                 </form>
@@ -59,6 +74,7 @@
                 </figure>
             </button>
             {#if userRole === role.admin}
+                <!-- khusus admin -->
                 <ul
                     class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
                 >
@@ -79,6 +95,7 @@
                     >
                 </ul>
             {:else}
+                <!-- khusus user atau public -->
                 <ul
                     class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
                 >
@@ -86,7 +103,10 @@
                         <a href="/#">Profile</a>
                     </li>
                     <li class="mb-1 rounded bg-default text-white font-bold">
-                        <a href="/#">Category</a>
+                        <a href="/genre/1">Genre</a>
+                    </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/#">Pasang Iklan</a>
                     </li>
                     <hr class="my-3 opacity-50 border-default" />
                     {#if token === ""}

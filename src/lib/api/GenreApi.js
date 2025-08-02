@@ -29,5 +29,11 @@ class GenreApi {
             method: 'GET'
         })
     }
+    static async getById(genreId, page, size) {
+        const apiUrl = import.meta.env.VITE_API_URL
+        return fetch(`${apiUrl}/api/genres/${genreId}?page=${page}&size=${size}`, {
+            method: 'GET'
+        })
+    }
 }
 export default GenreApi

@@ -41,7 +41,7 @@ class ComicApi {
     }
     static async searchComic(keyword, page, size) {
         const apiUrl = import.meta.env.VITE_API_URL
-        return fetch(`${apiUrl}/api/public/comics/search?keyword=${keyword}&page=${page}&size=${size}`, {
+        return fetch(`${apiUrl}/api/search?keyword=${keyword}&page=${page}&size=${size}`, {
             method: 'GET'
         })
     }
