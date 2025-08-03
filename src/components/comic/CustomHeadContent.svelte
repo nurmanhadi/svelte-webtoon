@@ -54,14 +54,14 @@
     "image": [comic.cover_url],
     "author": {
       "@type": "Organization",
-      "name": "Welltoon"
+      "name": {appName}
     },
     "publisher": {
       "@type": "Organization",
       "name": "Welltoon",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://welltoon.site/logo.jpg"
+        "url": `${appUrl}/icon.jpg`
       }
     },
     "datePublished": comic.chapters?.find(c => c.number == chapterNumber)?.created_at,

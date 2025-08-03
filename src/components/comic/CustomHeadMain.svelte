@@ -27,7 +27,7 @@
         property="og:description"
         content="Baca manhwa, manga, manhua sub Indo terbaru. Update harian, kualitas HD, gratis!"
     />
-    <meta property="og:image" content={`${appUrl}/logo.jpg`} />
+    <meta property="og:image" content={`${appUrl}/icon.jpg`} />
     <meta property="og:url" content={appUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={appName} />
@@ -42,7 +42,7 @@
         name="twitter:description"
         content="Manhwa, manga, manhua full color terbaru hanya di Welltoon. Update cepat, baca tanpa iklan!"
     />
-    <meta name="twitter:image" content={`${appUrl}/logo.jpg`} />
+    <meta name="twitter:image" content={`${appUrl}/icon.jpg`} />
 
     <!-- Schema Markup (Organization + WebSite) -->
     <script type="application/ld+json">
@@ -57,13 +57,8 @@
         "name": {appName},
         "logo": {
           "@type": "ImageObject",
-          "url": {`${appUrl}/logo.jpg`}
+          "url": {`${appUrl}/icon.jpg`}
         }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {`${appUrl}/search?q={search_term_string}`},
-        "query-input": "required name=search_term_string"
       }
     })}
     </script>
