@@ -1,19 +1,21 @@
 <script>
-    import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { alertError } from "$lib/Alert.js";
-    import ComicApi from "$lib/api/ComicApi.js";
-    import CenterLoading from "../../../../components/CenterLoading.svelte";
+    import { alertError } from "$lib/Alert";
+    import ComicApi from "$lib/api/ComicApi";
 
-    const { params } = $props();
+    let comicType = $state("");
     let pageNumber = $state(1);
     let comics = $state([]);
     let size = $state(20);
     let totalPage = $state(0);
     let totalElement = $state(0);
 
-    async function getAllComicUpdate() {
-        const response = await ComicApi.getAllComic(pageNumber, size);
+    async function getAllComicByType() {
+        const response = await ComicApi.getAllComicByType(
+            comicType,
+            pageNumber,
+            size,
+        );
         const responseBody = await response.json();
         if (response.status === 200) {
             const data = responseBody.data;
@@ -28,8 +30,8 @@
     }
 
     $effect(() => {
-        pageNumber = parseInt($page.params.number);
-        getAllComicUpdate();
+        comicType = $page.params.type;
+        getAllComicByType();
     });
 </script>
 
@@ -96,7 +98,7 @@
                     >
                 {:else}
                     <button
-                        onclick={() => goto(`/comic/page/${(pageNumber -= 1)}`)}
+                        onclick={() => (pageNumber -= 1)}
                         class="bg-default text-white font-bold py-1 px-2 rounded"
                         >{"<"} Prev</button
                     >
@@ -109,7 +111,7 @@
                     >
                 {:else}
                     <button
-                        onclick={() => goto(`/comic/page/${(pageNumber += 1)}`)}
+                        onclick={() => (pageNumber += 1)}
                         class="bg-default text-white font-bold py-1 px-2 rounded"
                         >Next {">"}</button
                     >

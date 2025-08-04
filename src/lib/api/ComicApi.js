@@ -27,15 +27,15 @@ class ComicApi {
             method: 'GET'
         })
     }
-    static async getComicById(comicId) {
+    static async getAllComicByType(comicType, page, size) {
         const apiUrl = import.meta.env.VITE_API_URL
-        return fetch(`${apiUrl}/api/comics/${comicId}`, {
+        return fetch(`${apiUrl}/api/comics/type/${comicType}?page=${page}&size=${size}`, {
             method: 'GET'
         })
     }
-    static async getAllComicByType(type, page, size) {
+    static async getComicById(comicId) {
         const apiUrl = import.meta.env.VITE_API_URL
-        return fetch(`${apiUrl}/api/public/comics/type?type=${type}&page=${page}&size=${size}`, {
+        return fetch(`${apiUrl}/api/comics/${comicId}`, {
             method: 'GET'
         })
     }

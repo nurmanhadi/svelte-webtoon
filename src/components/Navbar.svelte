@@ -106,6 +106,9 @@
                         <a href="/genre/1">Genre</a>
                     </li>
                     <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/comic/type/manga">Type</a>
+                    </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
                         <a href="/#">Pasang Iklan</a>
                     </li>
                     <hr class="my-3 opacity-50 border-default" />

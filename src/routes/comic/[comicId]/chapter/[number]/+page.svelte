@@ -1,5 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
     import { alertError } from "$lib/Alert.js";
     import ChapterApi from "$lib/api/ChapterApi.js";
     import CenterLoading from "../../../../../components/CenterLoading.svelte";
@@ -7,7 +8,7 @@
 
     const { params } = $props();
     const comicId = $state(params.comicId);
-    let chapterNumber = $state(parseInt(params.number));
+    let chapterNumber = $state(0);
 
     let chapter = $state(null);
     let chapters = $state([]);
@@ -29,6 +30,7 @@
     }
 
     $effect(() => {
+        chapterNumber = parseInt($page.params.number);
         getChapter();
     });
 </script>
@@ -78,14 +80,12 @@
                                         class="p-2 border-b border-b-default text-default font-bold"
                                     >
                                         <a
-                                            onclick={() => {
-                                                chapterNumber = chapter.number;
+                                            onclick={() =>
                                                 document
                                                     .getElementById(
                                                         "list_chapter_modal_1",
                                                     )
-                                                    .close();
-                                            }}
+                                                    .close()}
                                             href={`/comic/${comicId}/chapter/${chapter.number}`}
                                             class="block"
                                             >Chapter {chapter.number}</a
@@ -110,12 +110,10 @@
                         >
                     {:else}
                         <button
-                            onclick={() => {
-                                chapterNumber -= 1;
+                            onclick={() =>
                                 goto(
-                                    `/comic/${comicId}/chapter/${chapterNumber}`,
-                                );
-                            }}
+                                    `/comic/${comicId}/chapter/${(chapterNumber -= 1)}`,
+                                )}
                             class="bg-default text-white font-bold py-1 px-2 rounded"
                             >{"<"} Prev</button
                         >
@@ -128,12 +126,10 @@
                         >
                     {:else}
                         <button
-                            onclick={() => {
-                                chapterNumber += 1;
+                            onclick={() =>
                                 goto(
-                                    `/comic/${comicId}/chapter/${chapterNumber}`,
-                                );
-                            }}
+                                    `/comic/${comicId}/chapter/${(chapterNumber += 1)}`,
+                                )}
                             class="bg-default text-white font-bold py-1 px-2 rounded"
                             >Next {">"}</button
                         >
@@ -172,14 +168,12 @@
                                     class="p-2 border-b border-b-default text-default font-bold"
                                 >
                                     <a
-                                        onclick={() => {
-                                            chapterNumber = chapter.number;
+                                        onclick={() =>
                                             document
                                                 .getElementById(
                                                     "list_chapter_modal_2",
                                                 )
-                                                .close();
-                                        }}
+                                                .close()}
                                         href={`/comic/${comicId}/chapter/${chapter.number}`}
                                         class="block"
                                         >Chapter {chapter.number}</a
@@ -204,10 +198,10 @@
                     >
                 {:else}
                     <button
-                        onclick={() => {
-                            chapterNumber -= 1;
-                            goto(`/comic/${comicId}/chapter/${chapterNumber}`);
-                        }}
+                        onclick={() =>
+                            goto(
+                                `/comic/${comicId}/chapter/${(chapterNumber -= 1)}`,
+                            )}
                         class="bg-default text-white font-bold py-1 px-2 rounded"
                         >{"<"} Prev</button
                     >
@@ -220,10 +214,10 @@
                     >
                 {:else}
                     <button
-                        onclick={() => {
-                            chapterNumber += 1;
-                            goto(`/comic/${comicId}/chapter/${chapterNumber}`);
-                        }}
+                        onclick={() =>
+                            goto(
+                                `/comic/${comicId}/chapter/${(chapterNumber += 1)}`,
+                            )}
                         class="bg-default text-white font-bold py-1 px-2 rounded"
                         >Next {">"}</button
                     >
