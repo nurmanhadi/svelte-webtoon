@@ -39,6 +39,26 @@
     <CenterLoading />
 {:else}
     <div class="m-2 min-h-screen">
+        <!-- list type comic -->
+        <div class="flex justify-center my-5">
+            <div class="dropdown dropdown-center">
+                <div
+                    tabindex="0"
+                    role="button"
+                    class="bg-default p-1 text-white font-bold rounded cursor-pointer"
+                >
+                    Type
+                </div>
+                <ul
+                    class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                    <li><a href="/comic/type/manga">Manga</a></li>
+                    <li><a href="/comic/type/manhua">Manhua</a></li>
+                    <li><a href="/comic/type/manhwa">Manhwa</a></li>
+                </ul>
+            </div>
+        </div>
+
         <!-- comic update -->
         <div>
             <!-- list card comic -->
