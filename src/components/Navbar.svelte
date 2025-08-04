@@ -69,7 +69,7 @@
                     <img
                         src={defaultProfile}
                         alt="logo"
-                        class="h-10 w-10 rounded-full"
+                        class="h-8 w-8 rounded-full"
                     />
                 </figure>
             </button>
@@ -87,6 +87,9 @@
                     <li class="mb-1 rounded bg-default text-white font-bold">
                         <a href="/admin/genre">Genre</a>
                     </li>
+                    <li class="mb-1 rounded bg-default text-white font-bold">
+                        <a href="/profile">Profile</a>
+                    </li>
                     <hr class="my-3 opacity-50 border-default" />
                     <button
                         onclick={() => goto("/auth/logout")}
@@ -100,7 +103,7 @@
                     class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
                 >
                     <li class="mb-1 rounded bg-default text-white font-bold">
-                        <a href="/#">Profile</a>
+                        <a href="/profile">Profile</a>
                     </li>
                     <li class="mb-1 rounded bg-default text-white font-bold">
                         <a href="/genre/1">Genre</a>
