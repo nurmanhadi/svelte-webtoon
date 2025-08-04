@@ -4,16 +4,23 @@
     import { get } from "svelte/store";
     import CenterLoading from "../../../components/CenterLoading.svelte";
     import { page } from "$app/stores";
+    import { jwtDecode } from "jwt-decode";
+    import { role } from "$lib/role";
 
     let comics = $state([]);
     let pageNumber = $state(1);
     let size = $state(1);
     let totalPage = $state(0);
     let totalElement = $state(0);
+    let accessRole = $state("");
 
     async function getAllComicUpdate() {}
 
     $effect(async () => {
+        const token = localStorage.getItem("access_token");
+        if (token != null && token != "") {
+            accessRole = jwtDecode(token).role;
+        }
         const keyword = $page.params.keyword;
         const response = await ComicApi.searchComic(keyword, pageNumber, size);
         const responseBody = await response.json();
@@ -53,17 +60,32 @@
             >
                 {#each comics as comic (comic.id)}
                     <div class="md:max-w-48">
-                        <a href={`/comic/${comic.id}`}>
-                            <figure>
+                        <a
+                            href={accessRole != role.admin
+                                ? `/comic/${comic.id}`
+                                : `/admin/comic/${comic.id}`}
+                        >
+                            <figure class="relative">
                                 <img
                                     src={comic.cover_url}
                                     alt={comic.cover_filename}
                                     class="w-full h-56 object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-105"
                                 />
+                                <p class="absolute bottom-1 right-2 text-lg">
+                                    {#if comic.type == "manhua"}
+                                        🇨🇳
+                                    {:else if comic.type == "manga"}
+                                        🇯🇵
+                                    {:else}
+                                        🇰🇷
+                                    {/if}
+                                </p>
                             </figure>
                         </a>
                         <a
-                            href={`/comic/${comic.id}`}
+                            href={accessRole != role.admin
+                                ? `/comic/${comic.id}`
+                                : `/admin/comic/${comic.id}`}
                             class="text-default leading-none my-2 min-h-8 font-bold text-center line-clamp-2"
                         >
                             {comic.title}

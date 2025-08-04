@@ -117,7 +117,7 @@
                         >
                     {:else}
                         <button
-                            onclick={() => goto("/auth/login")}
+                            onclick={() => goto("/auth/logout")}
                             class="btn bg-red-500 shadow-none text-white"
                             >Logout</button
                         >

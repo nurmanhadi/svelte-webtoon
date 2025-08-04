@@ -45,12 +45,21 @@
                 {#each comics as comic (comic.id)}
                     <div class="md:max-w-48">
                         <a href={`/comic/${comic.id}`}>
-                            <figure>
+                            <figure class="relative">
                                 <img
                                     src={comic.cover_url}
                                     alt={comic.cover_filename}
                                     class="w-full h-56 object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-105"
                                 />
+                                <p class="absolute bottom-1 right-2 text-lg">
+                                    {#if comic.type == "manhua"}
+                                        🇨🇳
+                                    {:else if comic.type == "manga"}
+                                        🇯🇵
+                                    {:else}
+                                        🇰🇷
+                                    {/if}
+                                </p>
                             </figure>
                         </a>
                         <a
