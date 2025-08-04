@@ -19,7 +19,6 @@
         const responseBody = await response.json();
         if (response.status === 200) {
             const data = responseBody.data;
-            console.log(data);
             user = data;
         } else {
             await alertError(responseBody.error);
@@ -105,11 +104,19 @@
                     bind:value={username}
                     required
                 />
-                <button
-                    type="submit"
-                    class="p-1 text-white font-bold bg-default rounded mx-1"
-                    >Submit</button
-                >
+                {#if loading}
+                    <button
+                        disabled
+                        class="p-1 text-white font-bold bg-default rounded mx-1 opacity-50"
+                        >Submit</button
+                    >
+                {:else}
+                    <button
+                        type="submit"
+                        class="p-1 text-white font-bold bg-default rounded mx-1"
+                        >Submit</button
+                    >
+                {/if}
             </form>
 
             <!-- upload avatar -->
@@ -121,11 +128,19 @@
                     bind:files={inputFile}
                     required
                 />
-                <button
-                    type="submit"
-                    class="p-1 text-white font-bold bg-default rounded mx-1"
-                    >Submit</button
-                >
+                {#if loading}
+                    <button
+                        disabled
+                        class="p-1 text-white font-bold bg-default rounded mx-1 opacity-50"
+                        >Submit</button
+                    >
+                {:else}
+                    <button
+                        type="submit"
+                        class="p-1 text-white font-bold bg-default rounded mx-1"
+                        >Submit</button
+                    >
+                {/if}
             </form>
 
             <!-- <form class="mt-10">
