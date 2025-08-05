@@ -3,6 +3,7 @@
     import { page } from "$app/stores";
     import { alertError } from "$lib/Alert.js";
     import ChapterApi from "$lib/api/ChapterApi.js";
+    import ComicApi from "$lib/api/ComicApi";
     import CenterLoading from "../../../../../components/CenterLoading.svelte";
     import CustomHeadContent from "../../../../../components/comic/CustomHeadContent.svelte";
 
@@ -28,10 +29,25 @@
             await alertError(responseBody.error);
         }
     }
+    async function updateViews() {
+        setTimeout(3000);
+        const response = await ComicApi.updateViews(comicId, 1);
+        const responseBody = await response.json();
+        if (response.status === 200) {
+            const data = responseBody.data;
+            chapter = data;
+            comic = data.comic;
+            chapters = data.comic.chapters;
+            contents = data.contents;
+        } else {
+            await alertError(responseBody.error);
+        }
+    }
 
     $effect(() => {
         chapterNumber = parseInt($page.params.number);
         getChapter();
+        updateViews();
     });
 </script>
 

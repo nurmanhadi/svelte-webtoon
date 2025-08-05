@@ -85,6 +85,10 @@
                             <th>Updated On</th>
                             <td>{dateFormatter(comic.updated_at)}</td>
                         </tr>
+                        <tr>
+                            <th>Views</th>
+                            <td>{comic.views}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="flex gap-2 my-3">

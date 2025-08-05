@@ -45,5 +45,11 @@ class ComicApi {
             method: 'GET'
         })
     }
+    static async updateViews(comicId, views) {
+        const apiUrl = import.meta.env.VITE_API_URL
+        return fetch(`${apiUrl}/api/comics/${comicId}/views/${views}`, {
+            method: 'PUT'
+        })
+    }
 }
 export default ComicApi
