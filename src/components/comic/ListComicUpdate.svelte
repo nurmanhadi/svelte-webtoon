@@ -2,6 +2,7 @@
     import { alertError } from "$lib/Alert";
     import ComicApi from "$lib/api/ComicApi";
     import CenterLoading from "../CenterLoading.svelte";
+    import ListComicPopulerDaily from "./ListComicPopulerDaily.svelte";
 
     let comics = $state([]);
     let page = $state(1);
@@ -26,12 +27,13 @@
 {#if !comics}
     <CenterLoading />
 {:else}
-    <div class="m-2 min-h-screen">
+    <div>
+        <!-- list comic daily populer -->
+        <ListComicPopulerDaily />
+
         <!-- comic update -->
         <div>
-            <div
-                class="flex justify-between items-center my-3 bg-default px-1 rounded"
-            >
+            <div class="flex justify-between items-center my-3 bg-default px-2">
                 <h1 class="font-bold text-lg text-white">Update</h1>
                 <a href="/comic/page/1" class="text-xs text-white rounded"
                     >VIEW ALL</a

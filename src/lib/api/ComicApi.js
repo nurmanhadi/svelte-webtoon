@@ -27,6 +27,12 @@ class ComicApi {
             method: 'GET'
         })
     }
+    static async getAllComicByViewsByPeriod(timePeriod, limit) {
+        const apiUrl = import.meta.env.VITE_API_URL
+        return fetch(`${apiUrl}/api/comics/period/${timePeriod}?limit=${limit}`, {
+            method: 'GET'
+        })
+    }
     static async getAllComicByType(comicType, page, size) {
         const apiUrl = import.meta.env.VITE_API_URL
         return fetch(`${apiUrl}/api/comics/type/${comicType}?page=${page}&size=${size}`, {
