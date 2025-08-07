@@ -79,7 +79,7 @@
                     class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm top-13"
                 >
                     <li class="mb-1 rounded bg-default text-white font-bold">
-                        <a href="/#">Dashboard</a>
+                        <a href="/admin/dashboard">Dashboard</a>
                     </li>
                     <li class="mb-1 rounded bg-default text-white font-bold">
                         <a href="/admin/comic">Comic</a>
