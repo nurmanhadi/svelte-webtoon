@@ -3,12 +3,11 @@
     import ComicApi from "$lib/api/ComicApi";
     import { period } from "$lib/perios";
     import CenterLoading from "../CenterLoading.svelte";
-    import logo from "../../assets/logo.jpg";
 
     let comics = $state([]);
     async function getAllComicPeriodDaily() {
         const response = await ComicApi.getAllComicByViewsByPeriod(
-            period.allTime,
+            period.daily,
             10,
         );
         const responseBody = await response.json();

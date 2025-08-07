@@ -83,7 +83,7 @@
                         </tr>
                         <tr>
                             <th>Updated On</th>
-                            <td>{dateFormatter(comic.updated_at)}</td>
+                            <td>{dateFormatter(comic.updated_post)}</td>
                         </tr>
                         <tr>
                             <th>Views</th>

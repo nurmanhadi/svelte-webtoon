@@ -2,6 +2,7 @@
     import { alertError } from "$lib/Alert";
     import ComicApi from "$lib/api/ComicApi";
     import CenterLoading from "../CenterLoading.svelte";
+    import ListComicPopuler from "./ListComicPopuler.svelte";
     import ListComicPopulerDaily from "./ListComicPopulerDaily.svelte";
 
     let comics = $state([]);
@@ -87,5 +88,6 @@
                 {/each}
             </div>
         </div>
+        <ListComicPopuler />
     </div>
 {/if}
