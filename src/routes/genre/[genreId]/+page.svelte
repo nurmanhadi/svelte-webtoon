@@ -36,7 +36,6 @@
             size = data.comics.size;
             totalElement = data.comics.total_element;
             totalPage = data.comics.total_page;
-            console.log(data);
         } else {
             await alertError(responseBody.error);
         }
@@ -87,10 +86,10 @@
 
         <!-- list card comic -->
         <div
-            class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3"
+            class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3 px-2"
         >
             {#each comics as comic (comic.id)}
-                <div class="md:max-w-48">
+                <div class="md:max-w-48 w-full">
                     <a href={`/comic/${comic.id}`}>
                         <figure class="relative">
                             <img

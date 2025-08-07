@@ -36,15 +36,14 @@
 {#if !comics}
     <CenterLoading />
 {:else}
-    <div class="m-2 min-h-screen">
-        <!-- comic update -->
+    <div>
         <div>
             <!-- list card comic -->
             <div
-                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3"
+                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3 px-2"
             >
                 {#each comics as comic (comic.id)}
-                    <div class="md:max-w-48">
+                    <div class="md:max-w-48 w-full">
                         <a href={`/comic/${comic.id}`}>
                             <figure class="relative">
                                 <img

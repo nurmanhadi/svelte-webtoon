@@ -22,9 +22,9 @@
         if (response.status === 200) {
             const data = responseBody.data;
             chapter = data;
-            comic = data.comic;
-            chapters = data.comic.chapters;
-            contents = data.contents;
+            comic = chapter.comic;
+            chapters = chapter.comic.chapters;
+            contents = chapter.contents;
         } else {
             await alertError(responseBody.error);
         }
@@ -33,13 +33,7 @@
         setTimeout(3000);
         const response = await ComicApi.updateViews(comicId, 1);
         const responseBody = await response.json();
-        if (response.status === 200) {
-            const data = responseBody.data;
-            chapter = data;
-            comic = data.comic;
-            chapters = data.comic.chapters;
-            contents = data.contents;
-        } else {
+        if (response.status !== 200) {
             await alertError(responseBody.error);
         }
     }

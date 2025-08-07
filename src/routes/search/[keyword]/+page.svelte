@@ -9,7 +9,7 @@
 
     let comics = $state([]);
     let pageNumber = $state(1);
-    let size = $state(1);
+    let size = $state(20);
     let totalPage = $state(0);
     let totalElement = $state(0);
     let accessRole = $state("");
@@ -42,87 +42,75 @@
 {:else if comics.length == 0}
     <h1 class="my-10 text-center">comic not found</h1>
 {:else}
-    <div class="m-2 min-h-screen">
-        <!-- comic update -->
-        <div>
-            <div
-                class="flex justify-between items-center my-3 bg-default px-1 rounded"
-            >
-                <h1 class="font-bold text-lg text-white">Update</h1>
-                <a href="/comic/page/1" class="text-xs text-white rounded"
-                    >VIEW ALL</a
+    <div>
+        <!-- list card comic -->
+        <div
+            class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3 px-2"
+        >
+            {#each comics as comic (comic.id)}
+                <div class="md:max-w-48 w-full">
+                    <a
+                        href={accessRole != role.admin
+                            ? `/comic/${comic.id}`
+                            : `/admin/comic/${comic.id}`}
+                    >
+                        <figure class="relative">
+                            <img
+                                src={comic.cover_url}
+                                alt={comic.cover_filename}
+                                class="w-full h-56 object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-105"
+                            />
+                            <p class="absolute bottom-1 right-2 text-lg">
+                                {#if comic.type == "manhua"}
+                                    🇨🇳
+                                {:else if comic.type == "manga"}
+                                    🇯🇵
+                                {:else}
+                                    🇰🇷
+                                {/if}
+                            </p>
+                        </figure>
+                    </a>
+                    <a
+                        href={accessRole != role.admin
+                            ? `/comic/${comic.id}`
+                            : `/admin/comic/${comic.id}`}
+                        class="text-default leading-none my-2 min-h-8 font-bold text-center line-clamp-2"
+                    >
+                        {comic.title}
+                    </a>
+                </div>
+            {/each}
+        </div>
+
+        <!-- pagination -->
+        <div class="flex gap-2 my-5 justify-center">
+            {#if pageNumber == 1}
+                <button
+                    disabled
+                    class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
+                    >{"<"} Prev</button
                 >
-            </div>
-
-            <!-- list card comic -->
-            <div
-                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center my-3"
-            >
-                {#each comics as comic (comic.id)}
-                    <div class="md:max-w-48">
-                        <a
-                            href={accessRole != role.admin
-                                ? `/comic/${comic.id}`
-                                : `/admin/comic/${comic.id}`}
-                        >
-                            <figure class="relative">
-                                <img
-                                    src={comic.cover_url}
-                                    alt={comic.cover_filename}
-                                    class="w-full h-56 object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-105"
-                                />
-                                <p class="absolute bottom-1 right-2 text-lg">
-                                    {#if comic.type == "manhua"}
-                                        🇨🇳
-                                    {:else if comic.type == "manga"}
-                                        🇯🇵
-                                    {:else}
-                                        🇰🇷
-                                    {/if}
-                                </p>
-                            </figure>
-                        </a>
-                        <a
-                            href={accessRole != role.admin
-                                ? `/comic/${comic.id}`
-                                : `/admin/comic/${comic.id}`}
-                            class="text-default leading-none my-2 min-h-8 font-bold text-center line-clamp-2"
-                        >
-                            {comic.title}
-                        </a>
-                    </div>
-                {/each}
-            </div>
-
-            <!-- pagination -->
-            <div class="flex gap-2 my-5 justify-center">
-                {#if pageNumber == 1}
-                    <button
-                        disabled
-                        class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
-                        >{"<"} Prev</button
-                    >
-                {:else}
-                    <button
-                        onclick={() => (pageNumber -= 1)}
-                        class="bg-default text-white font-bold py-1 px-2 rounded"
-                        >{"<"} Prev</button
-                    >
-                {/if}
-                {#if pageNumber == totalPage}
-                    <button
-                        disabled
-                        class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
-                        >Next {">"}</button
-                    >
-                {:else}
-                    <button
-                        onclick={() => (pageNumber += 1)}
-                        class="bg-default text-white font-bold py-1 px-2 rounded"
-                        >Next {">"}</button
-                    >
-                {/if}
-            </div>
+            {:else}
+                <button
+                    onclick={() => (pageNumber -= 1)}
+                    class="bg-default text-white font-bold py-1 px-2 rounded"
+                    >{"<"} Prev</button
+                >
+            {/if}
+            {#if pageNumber == totalPage}
+                <button
+                    disabled
+                    class="bg-default text-white font-bold py-1 px-2 rounded opacity-50"
+                    >Next {">"}</button
+                >
+            {:else}
+                <button
+                    onclick={() => (pageNumber += 1)}
+                    class="bg-default text-white font-bold py-1 px-2 rounded"
+                    >Next {">"}</button
+                >
+            {/if}
         </div>
     </div>
 {/if}

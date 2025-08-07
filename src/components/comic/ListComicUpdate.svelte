@@ -42,10 +42,10 @@
 
             <!-- list card comic -->
             <div
-                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center"
+                class="grid grid-cols-2 md:grid-cols-5 gap-2 justify-items-center px-2"
             >
                 {#each comics as comic (comic.id)}
-                    <div class="md:max-w-48">
+                    <div class="md:max-w-48 w-full">
                         <a href={`/comic/${comic.id}`}>
                             <figure class="relative">
                                 <img
