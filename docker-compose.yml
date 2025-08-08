@@ -1,0 +1,12 @@
+services:
+  frontend:
+    image: louctre/frontend:latest
+    container_name: frontend
+    pull_policy: always
+    restart: unless-stopped
+    networks:
+      - welltoon-private
+  
+networks:
+  welltoon-private:
+    external: true
