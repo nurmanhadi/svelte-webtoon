@@ -16,9 +16,9 @@ jobs:
 
       - name: Buat file .env
         run: |
-          echo "VITE_APP_URL=${{ secrets.VITE_APP_URL }}" >> .env
-          echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> .env
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_APP_URL=https://welltoon.site" >> .env
+          echo "VITE_APP_NAME=Welltoon" >> .env
+          echo "VITE_API_URL=https://api.welltoon.site" >> .env
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
