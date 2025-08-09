@@ -14,11 +14,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Buat file .env
-        run: |
-          echo "VITE_APP_URL=https://welltoon.site" >> .env
-          echo "VITE_APP_NAME=Welltoon" >> .env
-          echo "VITE_API_URL=https://api.welltoon.site" >> .env
+      # - name: Buat file .env
+      #   run: |
+      #     echo "VITE_APP_URL=https://welltoon.site" >> .env
+      #     echo "VITE_APP_NAME=Welltoon" >> .env
+      #     echo "VITE_API_URL=https://api.welltoon.site" >> .env
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
